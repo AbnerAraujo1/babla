@@ -1,0 +1,134 @@
+<section id="dados-devolutiva">
+    <table class="tabela-azul">
+    
+            <tr class="dados-consulta">
+              <td>Data Avaliação</td>
+              <td>N° Proposta</td>  
+              <td colspan="2">Produto</td>
+              <td>Canal de entrada</td>
+              <td></td>
+              
+            </tr>
+    
+          <tr class="dados-resposta">
+            <td>{{ dataAval }}</td>
+            <td>{{ nProposta }} </td>
+            <td colspan="2">Previdência Individual(Renda)</td>
+            <td >Joker</td>
+            <td></td>
+           
+           
+          </tr>
+         </table>
+       
+        </section>
+  <!-- TABELA MAIOR -->
+  <section id="table-devolutiva">
+    <table>
+      <td  routerLinkActive="btn-ativo" id="butons" routerLink="/vidaeprevidenciacoletivacnpj">CPNJ</td>
+      <td  routerLinkActive="btn-ativo" id="butons" routerLink="/vidaeprevidenciacoletivacpf">CPF</td>
+      <td  routerLinkActive="btn-ativo" id="butons" routerLink="/vidaeprevidenciaindividualrisco">Individual e risco</td>
+      <td  routerLinkActive="btn-ativo" id="butons" routerLink="/vidaeprevidenciaindividualsobrevivencia">Sobrevivência</td>
+    </table>
+    <table class="table-d">
+  
+      <thead>
+    <tr>
+    <th>Dados consultados na fonte </th>
+    <th></th>
+    <th class="botao" *ngIf="canShow3"><button (click)="changeCanShow3()"  data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+    <th *ngIf="canShow3 == false" class="botao"><button (click)="changeCanShow3()"  data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+    </tr>
+    </thead>
+    
+    <tbody *ngIf="canShow3">
+    <tr>
+    <td class="tb"><h3>Nome</h3>Djalma Oliveira Rios</td>
+    <td class="tb"><h3>Cpf</h3>065.234.254-50</td>
+    <td class="tb"><h3>Renda</h3> 4000.000 </td>
+    </tr>
+    
+    <tr>
+    <td class="tb" style="line-height: 1.5;padding-top: 25px;"><h3>Endereço</h3>Avenida 7th, nº 470, Nova Iorque, NY, cep: 12318, Estados Unidos</td>
+    <td class="tb"><h3>Profissão</h3> Engenheiro</td>
+    <td class="tb"><h3>Acúmulo de Risco</h3>XXXXXXX
+    </td>
+    
+    </tr>
+    <tr class="tb"></tr>
+    <td class="tb"><h3>SINOP</h3>Não</td>
+    <td class="tb"><h3>Vínculo Trabalhista(CLT)</h3>Não</td>
+   <td class="tb"><h3>Data de Nascimento</h3> 07/12/1995</td>
+    
+    <tr>
+      <td class="tb"><h3>Gênero  </h3>Masculino</td>
+    <td class="tb"><h3>PEP</h3>Não consta na lista pep</td>
+    <td class="tb"><h3>Análises especiais</h3>Não consta na lista de análises especiais</td>
+  
+    </tr>
+    <tr>  <td class="tb"><h3>Beneficiário</h3>Sim</td></tr>
+    
+   
+   
+    
+    <tr>
+    <td class="tb"><h3></h3></td>
+    
+    </tr>
+   
+    </tbody>
+    </table>
+    <section id="table-w">
+      <table class="table-d">
+      <tr class="tr-d">
+      <th>Beneficiário(s)</th>
+      <th></th>
+      <th></th>
+      </tr>
+      
+      <tr>
+      <td class="tb"><h3>Nome</h3>Alírio José Silva</td>
+      <td class="tb"><h3>Cpf</h3>050.390.294-50</td>
+      <td class="tb"><h3>Endereço</h3>Avenida 7th, nº 470,  NY, EUA</td>
+      </tr>
+      
+      <tr>
+      <td class="tb"><h3>Profissão</h3>Engenheiro </td>
+      <td class="tb"><h3>Vínculo com o titular</h3>Sim</td>
+      <td class="tb"><h3>PEP</h3>Não consta na lista pep</td>
+      </tr>
+      
+      <tr>
+      <td class="tb"><h3>Análises especiais</h3>Não consta na lista de análises especiais</td>
+      
+      </tr>
+   
+      
+      </table>
+      </section>
+      <section id="table-w">
+        <table class="table-d">
+        
+        <tr>
+        <td class="tb"><h3>Nome</h3>Anthony José Silva</td>
+        <td class="tb"><h3>Cpf</h3>020.190.394-70</td>
+        <td class="tb"><h3>Endereço</h3>Avenida 6th, nº 170, NY,EUA</td>
+        </tr>
+        
+        <tr>
+        <td class="tb"><h3>Profissão</h3>Enfermeiro </td>
+        <td class="tb"><h3>Vínculo com o titular</h3>Sim</td>
+        <td class="tb"><h3>PEP</h3>Não consta na lista pep</td>
+        </tr>
+        
+        <tr>
+        <td class="tb"><h3>Análises especiais</h3>Não consta na lista de análises especiais</td>
+        
+        </tr>
+     
+        
+        </table>
+        </section>
+    
+  </section>
+    

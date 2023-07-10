@@ -1,0 +1,31 @@
+pipelines:
+  branches:
+    homolog:
+     - step:
+         name: prepare NodeJS
+         image: node:18
+         caches:
+           - node
+         script:
+          # Instalar as dependências do Node.js
+          - npm install
+          # Executar o build do Angular
+          - npm run build
+         artifacts:
+           paths:
+             - dist/**      
+     - step:
+         name: Deploy to AWS
+         image: amazon/aws-cli
+         dependencies:
+           - dist
+         oidc: true
+         script:
+          - export AWS_REGION=us-east-1
+          - export AWS_ROLE_ARN=arn:aws:iam::301676479058:role/BitBucktetIntegrationService
+          - export AWS_WEB_IDENTITY_TOKEN_FILE=$(pwd)/web-identity-token
+          - echo $BITBUCKET_STEP_OIDC_TOKEN > $(pwd)/web-identity-token
+          - echo "Installing dependencies..."        
+          #- aws s3 sync dist/gerador-de-fontes/ s3://frontgf
+          - aws s3 cp dist/gf-front s3://frontgf/ --recursive
+          - aws cloudfront create-invalidation --distribution-id EYAOQMPVTAWWT --paths "/*"

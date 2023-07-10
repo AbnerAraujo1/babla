@@ -1,0 +1,97 @@
+<app-rotas></app-rotas>
+<section id="dados-devolutiva">
+  <table class="tabela-azul">
+  
+          <tr class="dados-consulta">
+            <td>Data Avaliação</td>
+            <td>N° Contrato</td>  
+            <td colspan="2">Produto</td>
+            <td>Canal de entrada</td>
+          
+          </tr>
+  
+        <tr class="dados-resposta">
+          <td>{{ dataAval }}</td>
+          <td>{{ nProposta }} </td>
+          <td colspan="2">Vida e Previdência Coletivo(Coberturas de Risco)</td>
+          <td >Joker</td>
+         
+        </tr>
+       </table>
+      </section>
+<!--Sessão verde-->
+<section id="filtro-green" >
+
+  <div class="ls-custom-select">
+  <select class="item" (change)="filter($event);" [(ngModel)]="selectedFiltro">
+  <option [value]="'Todos'">Todos</option>
+  <option [value]="regra.codigoRetorno" *ngFor="let regra of dataSelect" >
+  {{regra.codigoRetorno}}
+  </option>
+  </select>
+  </div>
+  
+  <div class="ls-custom-select">
+  <label for="name">
+  <span>Atributo 1:</span>
+  </label>
+  <input type="text" [(ngModel)]="filtroDigitado" >
+  <label for="name" *ngIf="+selectedFiltro == 5 || +selectedFiltro == 55
+  || +selectedFiltro == 8 || +selectedFiltro == 10">
+  <span>Atributo 2:</span>
+  </label>
+  <input type="text" [(ngModel)]="filtroDigitado2" *ngIf="+selectedFiltro == 5 || +selectedFiltro == 55
+  || +selectedFiltro == 8 || +selectedFiltro == 10" >
+  <button type="button" (click)="filtrar()">Filtrar</button>
+  </div>
+  </section>
+  
+  <section id="table-devolutiva">
+  
+  <table class="table-d">
+  
+  <tr class="tr-d">
+  <th>Avaliação</th>
+  <th [width]="50"></th>
+  <th>Resultado da avaliação</th>
+  <th [width]="50"></th>
+  </tr>
+  
+  <tr *ngFor="let regra of this.data.regras let i = index " #linha>
+  
+  <td class="td-d"> {{regra.nomeAmigavel}}</td>
+  
+  <td class="td-d">
+  
+  <fa-icon class="ico-td-circle ico-red"
+  *ngIf="regra.semaforo === 'VERMELHO'"
+  [icon]="farCircleDot"></fa-icon>
+  
+  <fa-icon class="ico-td-circle ico-green"
+  *ngIf="regra.semaforo === 'VERDE'"
+  [icon]="farCircleDot"></fa-icon>
+  
+  <fa-icon class="ico-td-circle ico-yellow"
+  *ngIf="regra.semaforo === 'AMARELO'"
+  [icon]="farCircleDot"></fa-icon>
+  
+  <fa-icon class="ico-td-circle ico-white"
+  *ngIf="regra.semaforo === 'BRANCO'"
+  [icon]="farCircleDot"></fa-icon>
+  </td>
+  
+  
+  <td class="td-d" id="nome-regra"> {{regra.devolutiva}}</td>
+  
+  <td colspan="3" class="td-d sugEnc mostrar">
+  <b>Sugestão de Encaminhamento:</b> {{regra.encaminhamento}} 
+  </td>
+  
+  <td class="td-d" class="tr-d td-d tr-none">
+  <fa-icon [icon]="faCircleInfo" class="ico-info" (mouseenter)="ocultar($event)" (mouseleave)="mostrare($event)"></fa-icon>
+  </td>
+  
+  </tr>
+  </table>
+  </section>
+   

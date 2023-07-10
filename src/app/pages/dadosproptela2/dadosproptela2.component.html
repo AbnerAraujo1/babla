@@ -1,0 +1,343 @@
+<section id="dados-devolutiva"  *ngIf="this.date.informacoesCanalEntrada.nomePessoaFisica ||this.date.informacoesCanalEntrada.cnpj">
+  <div style="display: flex;">
+    <button class="improv"><a class="improve">Dados do Proponente</a></button>
+  </div>
+</section>
+<!-- TABELA MAIOR -->
+<section id="table-devolutiva" *ngIf="this.date.informacoesCanalEntrada.nomePessoaFisica">
+
+
+<table class="table-d" >
+<thead>
+<tr>
+<th>Informações do canal de entrada </th>
+<th></th>
+<th class="botao" *ngIf="canShow3"><button (click)="changeCanShow3()"  data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+<th *ngIf="canShow3 == false" class="botao"><button (click)="changeCanShow3()"  data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+</tr>
+</thead>
+
+<tbody *ngIf="canShow3">
+<tr>
+<td class="tb"><h3>Nome</h3>
+  <p  *ngIf="this.date.informacoesCanalEntrada.nomePessoaFisica;else nomeCpf">
+   {{this.date.informacoesCanalEntrada.nomePessoaFisica}}
+   </p>
+   <ng-template #nomeCpf>
+    Informação Indisponível. 
+  </ng-template>
+  </td>
+  <td class="tb"><h3>CPF</h3>
+    <p  *ngIf="this.date.informacoesCanalEntrada.cpf;else Cpf">
+     {{this.date.informacoesCanalEntrada.cpf}}
+     </p>
+     <ng-template #Cpf>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+    <td class="tb"><h3>Ramo</h3>
+      <p  *ngIf="this.date.informacoesCanalEntrada.ramo;else ramo">
+       {{this.date.informacoesCanalEntrada.ramo}}
+       </p>
+       <ng-template #ramo>
+        Informação Indisponível.
+      </ng-template>
+      </td>
+      
+</tr>
+
+<tr >
+
+
+
+
+
+</tr>
+<tr>
+  <td class="tb"><h3>Plano</h3>
+        Informação indisponível
+    </td>
+<td class="tb"><h3>Cobertura</h3>
+  <p  *ngIf="this.date.informacoesCanalEntrada.coberturas;else cobertura">
+   {{this.date.informacoesCanalEntrada.coberturas}}
+   </p>
+   <ng-template #cobertura>
+    Informação Indisponível.
+  </ng-template>
+  </td>
+  <td class="tb"  *ngFor="let prod of this.date.informacoesCanalEntrada.produtos"><h3>Produto</h3>{{prod.produto}}</td>
+  </tr>
+</tbody>
+</table>
+
+<table class="table-de">
+  
+  <tr class="tr-d" >
+  
+  <th>Devolutivas do motor de cálculo</th>
+ <th [width]="50"></th>
+  <th>Resultado da avaliação</th>
+  <th [width]="50" style="padding-left: 10px;"   class="botao2" *ngIf="canShow4" ><button (click)="changeCanShow4()"  data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+  <th [width]="50"  style="padding-left: 10px;" *ngIf="canShow4 == false" class="botao2"><button (click)="changeCanShow4()"  data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+  
+  </tr>
+
+  <tbody  *ngIf="canShow4" class="tabela-body-2">
+    <tr class="tre" *ngFor="let regra of this.date.devolutivaMotorCalculo.regrasResponse let i = index " #linha>
+      
+      
+    <div *ngIf=""></div>
+        <td  class="td-d"> {{regra.nomeAmigavel}}</td>
+        <td class="td-d">
+        
+        <fa-icon class="ico-td-circle ico-red"
+        *ngIf="regra.semaforo === 'VERMELHO'"
+        [icon]="farCircleDot"></fa-icon>
+        
+        <fa-icon class="ico-td-circle ico-green"
+        *ngIf="regra.semaforo === 'VERDE'"
+        [icon]="farCircleDot"></fa-icon>
+        
+        <fa-icon class="ico-td-circle ico-yellow"
+        *ngIf="regra.semaforo === 'AMARELO'"
+        [icon]="farCircleDot"></fa-icon>
+        
+        <fa-icon class="ico-td-circle ico-white"
+        *ngIf="regra.semaforo === 'BRANCO'"
+        [icon]="farCircleDot"></fa-icon>
+        </td>
+
+        
+        
+        <td class="td-d" id="nome-regra"> {{regra.devolutiva}}</td>
+        
+        <td colspan="3" class="td-d sugEnc mostrar">
+        <b>Sugestão de Encaminhamento:</b> {{regra.encaminhamento}} 
+        </td>
+        
+        <td class="td-d" class="tr-d td-d tr-none">
+        <fa-icon [icon]="faCircleInfo" class="ico-info" (mouseenter)="ocultar($event)" (mouseleave)="mostrare($event)"></fa-icon>
+        </td>
+        
+      </tr>
+  </tbody>
+  </table>
+<table class="table-d">
+<thead>
+<tr>
+<th>Dados consultados na fonte </th>
+<th></th>
+<th class="botao" *ngIf="canShow2"><button (click)="changeCanShow2()" data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+<th *ngIf="canShow2 == false" class="botao"><button (click)="changeCanShow2()" data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+
+</tr>
+</thead>
+
+<tbody *ngIf="canShow2" class="tabela-body-2">
+<tr>
+ 
+  <td class="tb"><h3>Nome</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.nome;else fonteName">
+     {{this.date.dadosConsultaFonte.nome}}
+     </p>
+     <ng-template #fonteName>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+
+<td class="tb"><h3>CPF</h3>
+  <p  *ngIf="this.date.dadosConsultaFonte.cpf;else fonteCpf">
+   {{this.date.dadosConsultaFonte.cpf}}
+   </p>
+   <ng-template #fonteCpf>
+    Informação Indisponível.
+  </ng-template>
+  </td>
+
+
+  <td class="tb"><h3>UF</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.uf;else nomeMae">
+     {{this.date.dadosConsultaFonte.uf}}
+     </p>
+     <ng-template #nomeMae>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+
+</tr>
+
+<tr >
+
+<td class="tb"><h3>Análises Especiais</h3>
+  <p  *ngIf="this.date.dadosConsultaFonte.analisesEspeciais ;else analisesEspeciais">
+   {{this.date.dadosConsultaFonte.analisesEspeciais}}
+   </p>
+   <ng-template #analisesEspeciais>
+    Informação Indisponível.
+  </ng-template>
+  </td>
+<td class="tb"><h3>PEP</h3>
+  <p  *ngIf="this.date.dadosConsultaFonte.pep;else pep">
+   {{this.date.dadosConsultaFonte.pep}}
+   </p>
+   <ng-template #pep>
+    Informação Indisponível.
+  </ng-template>
+  </td>
+<td class="tb" style="line-height: 1.5;padding-top: 63px;" ><h3>Número de telefone</h3>
+  {{this.date.dadosConsultaFonte.telefonesContato[0]}}<br>
+  {{this.date.dadosConsultaFonte.telefonesContato[1]}}<br>
+  {{this.date.dadosConsultaFonte.telefonesContato[2]}}<br>
+</td>
+
+</tr>
+<tr >
+  
+  <td class="tb"><h3>Data de nascimento</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.dataNascimento;else dataNascimento">
+     {{this.date.dadosConsultaFonte.dataNascimento  | date: 'dd/MM/yyyy'}}
+     </p>
+     <ng-template #dataNascimento>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+  
+  <td class="tb"><h3>Gênero</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.sexo;else sexo">
+     {{this.date.dadosConsultaFonte.sexo}} 
+     </p>
+     <ng-template #sexo>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+  <td class="tb"><h3>Município</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.cidade;else cidade">
+     {{this.date.dadosConsultaFonte.cidade}}
+     </p>
+     <ng-template #cidade>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+
+
+</tr>
+<tr >
+<td class="tb"><h3>Ano de falecimento</h3>
+  <p  *ngIf="this.date.dadosConsultaFonte.anoFalecimento;else anoFalecimento">
+   {{this.date.dadosConsultaFonte.anoFalecimento}}
+   </p>
+   <ng-template #anoFalecimento>
+  Nada consta
+  </ng-template>
+  </td>
+
+<td class="tb"  *ngIf="this.date.dadosConsultaFonte.indicioFalecimento===true"><h3>Indício de falecimento </h3> <p >Possui Indício</p></td>
+<td class="tb"  *ngIf="this.date.dadosConsultaFonte.indicioFalecimento===false"><h3>Indício de falecimento </h3> <p >Nada consta </p></td>
+<td class="tb" style="line-height: 1.5;padding-top: 2px;">
+  <h3>Endereço</h3>
+  {{this.date.dadosConsultaFonte.logradouro}},{{this.date.dadosConsultaFonte.numeroResidencia}}<br>
+
+
+</td>
+
+</tr>
+<tr>
+  
+  <td class="tb"><h3>Nome da mãe</h3>
+    <p  *ngIf="this.date.dadosConsultaFonte.nomeMae;else nomeMae">
+     {{this.date.dadosConsultaFonte.nomeMae}}
+     </p>
+     <ng-template #nomeMae>
+      Informação Indisponível.
+    </ng-template>
+    </td>
+    <td class="tb"><h3>Situação inscrição CPF</h3>
+      <p  *ngIf="this.date.dadosConsultaFonte.situacaoInscricaoCPF;else inscricaoCpf">
+       {{this.date.dadosConsultaFonte.situacaoInscricaoCPF}}
+       </p>
+       <ng-template #inscricaoCpf>
+        Informação Indisponível.
+      </ng-template>
+      </td>
+
+    
+</tr>
+
+
+</tbody>
+</table>
+
+</section>
+
+<section id="table-devolutiva"  *ngIf="this.date.informacoesCanalEntrada.cnpj">
+  
+  <table class="table-d">
+   
+    <thead>
+  <tr>
+  <th> Informações do canal de entrada  </th>
+  <th></th>
+  <th class="botao" *ngIf="canShow3"><button (click)="changeCanShow3()"  data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+  <th *ngIf="canShow3 == false" class="botao"><button (click)="changeCanShow3()"  data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+  </tr>
+  </thead>
+  
+  <tbody *ngIf="canShow3">
+  <tr >
+  <td class="tb"><h3>Razão Social</h3>{{this.date.informacoesCanalEntrada.razaoSocial}}</td>
+  <td class="tb"><h3>CNPJ</h3>{{this.date.informacoesCanalEntrada.cnpj}}</td>
+  <td class="tb"><h3>Ramo</h3> {{this.date.informacoesCanalEntrada.ramo}}</td>
+  </tr>
+  
+  <tr >
+  <td class="tb"><h3>Produto</h3>Informação indisponível</td>
+  <td class="tb"><h3>Plano</h3>{{this.date.informacoesCanalEntrada.plano}}</td>
+  <td class="tb" ><h3>Cobertura</h3>{{this.date.informacoesCanalEntrada.coberturas}}</td>
+  
+  </tr>
+  </tbody>
+  </table>
+  <table class="table-d">
+    <thead>
+  <tr>
+  <th> Dados consultados na fonte </th>
+  <th></th>
+  <th class="botao" *ngIf="canShow2"><button (click)="changeCanShow2()" data-tooltip="Esconder" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronUp"></fa-icon></button></th>
+  <th *ngIf="canShow2 == false" class="botao"><button (click)="changeCanShow2()" data-tooltip="Expandir" data-flow="top"><fa-icon class="ico-tabela" [icon]=" faCircleChevronDown"></fa-icon></button></th>
+
+  </tr>
+  </thead>
+  
+  <tbody *ngIf="canShow2" class="tabela-body-2">
+  <tr>
+  <td class="tb" style="line-height: 1.5;padding-top:5px;"><h3>Razão Social</h3>{{this.date.dadosConsultaFonte.razaoSocial}}</td>
+  <td class="tb" style="line-height: 1.5;padding-top:5px;"><h3>CNPJ</h3>{{this.date.dadosConsultaFonte.cnpj}}</td>
+  <td class="tb" style="line-height: 1.5;padding-top:49px;"><h3>Ramo de atividade</h3>{{this.date.dadosConsultaFonte.ramoAtividade}}</td>
+  </tr>
+  
+  <tr >
+  <td class="tb"  ><h3>Análises especiais</h3>{{this.date.dadosConsultaFonte.analisesEspeciais}}</td>
+  <td class="tb" ><h3>PEP</h3> Informação indisponível</td>
+  <td class="tb" ><h3>CNAE</h3> {{this.date.dadosConsultaFonte.cnae}}</td>
+  
+  </tr>
+  <tr >
+    <td class="tb"><h3>UF</h3> {{this.date.dadosConsultaFonte.uf}}</td>
+    <td class="tb"><h3>Data Abertura</h3> {{this.date.dadosConsultaFonte.dataAbertura}}</td>
+    <td class="tb"  ><h3>Situação inscrição CNPJ</h3>{{this.date.dadosConsultaFonte.situacaoInscricaoCNPJ}}</td>
+    </tr>
+    <tr >
+      <td class="tb"  ><h3>Município</h3>{{this.date.dadosConsultaFonte.cidade}}</td>
+      <td class="tb" ><h3>CEP</h3>{{this.date.dadosConsultaFonte.cep}}</td>
+      <td class="tb"  style="line-height: 1.5;padding-top: 8px;"><h3>Endereço</h3>{{this.date.dadosConsultaFonte.logradouro}},
+         {{this.date.dadosConsultaFonte.numeroResidencia}}
+        </td>
+      </tr>
+      <tr >
+        <td class="tb"  ><h3>Bairro</h3>{{this.date.dadosConsultaFonte.bairro}}</td>
+        </tr>
+      
+  </tbody>
+  </table>
+  
+</section>
